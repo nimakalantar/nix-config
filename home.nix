@@ -39,7 +39,7 @@
           identityFile = "~/.ssh/github_ed25519.pub";
         };
       };
-      extraConfig = "UseKeychain yes\nAddKeysToAgent yes";
+      extraConfig = "AddKeysToAgent yes";
     };
   };
 }
