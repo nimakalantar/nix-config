@@ -5,10 +5,10 @@
 { config, pkgs, ... }:
 
 {
-  imports =
-    [ # Include the results of the hardware scan.
-      ./hardware-configuration.nix
-    ];
+  imports = [
+    ./hardware-configuration.nix
+    ./services/tailscale.nix
+  ];
 
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
@@ -45,7 +45,7 @@
     isNormalUser = true;
     description = "user";
     extraGroups = [ "networkmanager" "wheel" ];
-    packages = with pkgs; [ ]; 
+    packages = with pkgs; [ ];
     openssh.authorizedKeys.keys = [ "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAILp007s4hFGCvBDiBwDzY45KZfyjUEcE34nE5W2eYPGD nima.kalantar" ];
   };
 
@@ -55,38 +55,18 @@
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
 
-  # List packages installed in system profile. To search, run:
-  # $ nix search wget
-  environment.systemPackages = with pkgs; [
-    tailscale
-  ];
-
   # List services that you want to enable:
 
   # Enable the OpenSSH daemon.
   services.openssh = {
     enable = true;
-    passwordAuthentication = false; 
+    passwordAuthentication = false;
   };
 
   programs.ssh.startAgent = true;
 
   # Enable VSCode server
   services.code-server.enable = true;
-
-  # Enable the tailscale service
-  services.tailscale.enable = true;
-
-  networking.firewall = {
-    # Enable the firewall
-    enable = true;
-
-    # Always allow traffic from your Tailscale network
-    trustedInterfaces = [ "tailscale0" ];
-
-    # Allow the Tailscale UDP port through the firewall
-    allowedUDPPorts = [ config.services.tailscale.port ];
-  };
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
