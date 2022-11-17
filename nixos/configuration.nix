@@ -13,6 +13,7 @@
 
     # You can also split up your configuration and import pieces of it here:
     ./users.nix
+    ./locale.nix
 
     # Import your generated (nixos-generate-config) hardware configuration
     ./hardware-configuration.nix
@@ -66,21 +67,6 @@
 
   # Enable networking
   networking.networkmanager.enable = true;
-
-  # Set your time zone.
-  time.timeZone = "Europe/London";
-
-  # Select internationalisation properties.
-  i18n.defaultLocale = "en_GB.utf8";
-
-  # Configure keymap in X11
-  services.xserver = {
-    layout = "gb";
-    xkbVariant = "";
-  };
-
-  # Configure console keymap
-  console.keyMap = "uk";
 
   # Enable automatic login for the user.
   services.getty.autologinUser = "user";
