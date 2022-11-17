@@ -67,9 +67,7 @@
 
   # Enable networking
   networking.networkmanager.enable = true;
-
-  # Enable automatic login for the user.
-  services.getty.autologinUser = "user";
+	networking.wireless.iwd.enable = true;
 
   networking.hostName = "nuc";
 
@@ -78,16 +76,17 @@
   boot.loader.efi.canTouchEfiVariables = true;
   boot.loader.efi.efiSysMountPoint = "/boot/efi";
 
-  services.openssh = {
-    enable = true;
-    # Forbid root login through SSH.
-    permitRootLogin = "no";
-    passwordAuthentication = false;
+  services = {
+    getty.autologinUser = "user";
+
+    openssh.enable = true;
+    openssh.permitRootLogin = "no";
+    openssh.passwordAuthentication = false;
+
+    code-server.enable = true;
   };
 
   programs.ssh.startAgent = true;
-
-  services.code-server.enable = true;
 
   # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
   system.stateVersion = "22.05";
