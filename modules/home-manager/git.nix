@@ -17,7 +17,7 @@ let
     commit.gpgsign = true;
     gpg.format = "ssh";
     gpg.ssh.allowedSignersFile = "~/.ssh/allowed_signers";
-    user.signingKey = "~/.ssh/github_ed25519.pub";
+    user.signingKey = "~/.ssh/id_ed25519.pub";
   };
 in
 {
