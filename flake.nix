@@ -1,17 +1,15 @@
 {
-  description = "Your new nix config";
-
   inputs = {
     # Nixpkgs
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+    hardware.url = "github:nixos/nixos-hardware";
 
     # Home manager
     home-manager.url = "github:nix-community/home-manager";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
 
-    # TODO: Add any other flake you might need
-    hardware.url = "github:nixos/nixos-hardware";
     agenix.url = "github:ryantm/agenix";
+    impermanence.url = "github:nix-community/impermanence";
   };
 
   outputs = { self, nixpkgs, home-manager, agenix, ... }@inputs:
@@ -26,12 +24,9 @@
       ];
     in
     rec {
-      # Your custom packages
-      # Acessible through 'nix build', 'nix shell', etc
-      packages = forAllSystems (system:
-        let pkgs = nixpkgs.legacyPackages.${system};
-        in import ./pkgs { inherit pkgs; }
-      );
+
+      formatter.x86_64-linux = nixpkgs.legacyPackages.x86_64-linux.nixpkgs-fmt;
+
       # Devshell for bootstrapping
       # Acessible through 'nix develop' or 'nix-shell' (legacy)
       devShells = forAllSystems (system:
@@ -39,8 +34,6 @@
         in import ./shell.nix { inherit pkgs; }
       );
 
-      # Your custom packages and modifications, exported as overlays
-      overlays = import ./overlays;
       # Reusable nixos modules you might want to export
       # These are usually stuff you would upstream into nixpkgs
       nixosModules = import ./modules/nixos;
@@ -52,7 +45,6 @@
         nuc = nixpkgs.lib.nixosSystem {
           specialArgs = { inherit inputs outputs; };
           modules = [
-            # > Our main nixos configuration file <
             ./nixos/configuration.nix
             agenix.nixosModule
           ];

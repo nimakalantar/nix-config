@@ -21,7 +21,7 @@ let
   };
 in
 {
-  home.file.".ssh/allowed_signers".text =  "* ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAILp007s4hFGCvBDiBwDzY45KZfyjUEcE34nE5W2eYPGD";
+  home.file.".ssh/allowed_signers".text = "* ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAILp007s4hFGCvBDiBwDzY45KZfyjUEcE34nE5W2eYPGD";
 
   programs.git = {
     enable = true;
