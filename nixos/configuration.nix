@@ -70,13 +70,14 @@
   networking.networkmanager.enable = true;
   networking.networkmanager.wifi.backend = "iwd";
 
-
   networking.hostName = "nuc";
 
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
   boot.loader.efi.efiSysMountPoint = "/boot/efi";
+
+  virtualisation.docker.enable = true;
 
   services = {
     getty.autologinUser = "user";
