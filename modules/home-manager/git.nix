@@ -4,6 +4,7 @@ let
   gitConfig = {
     core = {
       editor = "nano";
+      autocrlf = "input";
     };
     init.defaultBranch = "main";
     pull.rebase = true;
