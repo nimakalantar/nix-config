@@ -1,23 +1,5 @@
 {
   "nodes": {
-    "agenix": {
-      "inputs": {
-        "nixpkgs": "nixpkgs"
-      },
-      "locked": {
-        "lastModified": 1665870395,
-        "narHash": "sha256-Tsbqb27LDNxOoPLh0gw2hIb6L/6Ow/6lIBvqcHzEKBI=",
-        "owner": "ryantm",
-        "repo": "agenix",
-        "rev": "a630400067c6d03c9b3e0455347dc8559db14288",
-        "type": "github"
-      },
-      "original": {
-        "owner": "ryantm",
-        "repo": "agenix",
-        "type": "github"
-      }
-    },
     "hardware": {
       "locked": {
         "lastModified": 1668334946,
@@ -54,38 +36,7 @@
         "type": "github"
       }
     },
-    "impermanence": {
-      "locked": {
-        "lastModified": 1668668915,
-        "narHash": "sha256-QjY4ZZbs9shwO4LaLpvlU2bO9J1juYhO9NtV3nrbnYQ=",
-        "owner": "nix-community",
-        "repo": "impermanence",
-        "rev": "5df9108b346f8a42021bf99e50de89c9caa251c3",
-        "type": "github"
-      },
-      "original": {
-        "owner": "nix-community",
-        "repo": "impermanence",
-        "type": "github"
-      }
-    },
     "nixpkgs": {
-      "locked": {
-        "lastModified": 1665732960,
-        "narHash": "sha256-WBZ+uSHKFyjvd0w4inbm0cNExYTn8lpYFcHEes8tmec=",
-        "owner": "NixOS",
-        "repo": "nixpkgs",
-        "rev": "4428e23312933a196724da2df7ab78eb5e67a88e",
-        "type": "github"
-      },
-      "original": {
-        "owner": "NixOS",
-        "ref": "nixos-unstable",
-        "repo": "nixpkgs",
-        "type": "github"
-      }
-    },
-    "nixpkgs_2": {
       "locked": {
         "lastModified": 1668765800,
         "narHash": "sha256-rC40+/W6Hio7b/RsY8SvQPKNx4WqNcTgfYv8cUMAvJk=",
@@ -101,13 +52,49 @@
         "type": "github"
       }
     },
+    "nixpkgs-22_05": {
+      "locked": {
+        "lastModified": 1668307144,
+        "narHash": "sha256-uY2StvGJvTfgtLaiz3uvX+EQeWZDkiLFiz2vekgJ9ZE=",
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "eac99848dfd869e486573d8272b0c10729675ca2",
+        "type": "github"
+      },
+      "original": {
+        "owner": "NixOS",
+        "ref": "release-22.05",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
     "root": {
       "inputs": {
-        "agenix": "agenix",
         "hardware": "hardware",
         "home-manager": "home-manager",
-        "impermanence": "impermanence",
-        "nixpkgs": "nixpkgs_2"
+        "nixpkgs": "nixpkgs",
+        "sops-nix": "sops-nix"
+      }
+    },
+    "sops-nix": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ],
+        "nixpkgs-22_05": "nixpkgs-22_05"
+      },
+      "locked": {
+        "lastModified": 1668311578,
+        "narHash": "sha256-nF6mwSbVyvnlIICWFZlADegWdTsgrk1pZnA/0VqByNw=",
+        "owner": "Mic92",
+        "repo": "sops-nix",
+        "rev": "39f0fe57f1ef78764c1abc1de145f091fee1bbbb",
+        "type": "github"
+      },
+      "original": {
+        "owner": "Mic92",
+        "repo": "sops-nix",
+        "type": "github"
       }
     },
     "utils": {

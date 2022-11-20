@@ -14,6 +14,7 @@
     # You can also split up your configuration and import pieces of it here:
     ./users.nix
     ./locale.nix
+    ./network.nix
 
     # Import your generated (nixos-generate-config) hardware configuration
     ./hardware-configuration.nix
@@ -43,16 +44,6 @@
     "/crypto_keyfile.bin" = null;
   };
 
-  # Enable networking
-  networking.wireless.iwd.enable = true;
-  networking.networkmanager.enable = true;
-  networking.networkmanager.wifi.backend = "iwd";
-
-  # networking.wireless.networks = {
-  #   "" = {
-  #     psk = "";
-  #   };
-  # };
 
   networking.hostName = "nuc";
 

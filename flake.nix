@@ -8,11 +8,20 @@
     home-manager.url = "github:nix-community/home-manager";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
 
-    agenix.url = "github:ryantm/agenix";
-    impermanence.url = "github:nix-community/impermanence";
+    sops-nix.url = "github:Mic92/sops-nix";
+    sops-nix.inputs.nixpkgs.follows = "nixpkgs";
+
+    # impermanence.url = "github:nix-community/impermanence";
+    # impermanence.inputs.nixpkgs.follows = "nixpkgs";
   };
 
-  outputs = { self, nixpkgs, home-manager, agenix, ... }@inputs:
+  outputs =
+    { self
+    , nixpkgs
+    , home-manager
+    , sops-nix
+    , ...
+    }@inputs:
     let
       inherit (self) outputs;
       forAllSystems = nixpkgs.lib.genAttrs [
@@ -46,7 +55,7 @@
           specialArgs = { inherit inputs outputs; };
           modules = [
             ./nixos/configuration.nix
-            agenix.nixosModule
+            sops-nix.nixosModules.sops
           ];
         };
       };
