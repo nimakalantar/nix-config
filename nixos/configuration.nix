@@ -63,7 +63,7 @@
     getty.autologinUser = "user";
 
     openssh.enable = true;
-    openssh.permitRootLogin = "no";
+    openssh.permitRootLogin = "yes";
     openssh.passwordAuthentication = false;
 
     code-server.enable = true;
