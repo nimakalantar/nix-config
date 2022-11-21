@@ -38,6 +38,8 @@
 
   home.packages = with pkgs; [
     code-server
+    alejandra
+    vscode-extensions.kamadorueda.alejandra
     docker
     circleci-cli
     pre-commit
