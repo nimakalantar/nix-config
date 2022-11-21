@@ -37,6 +37,7 @@
   };
 
   home.packages = with pkgs; [
+    deploy-rs
     code-server
     alejandra
     vscode-extensions.kamadorueda.alejandra
