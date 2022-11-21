@@ -20,53 +20,64 @@
     };
   };
 
-  outputs = { self, nixpkgs, home-manager, sops-nix, deploy-rs, ... }@inputs:
-    with nixpkgs.lib;
-    let
-      inherit (self) outputs;
-      pkgs = import nixpkgs { system = "x86_64-linux"; };
-      mapAttrsToList = pkgs.lib.attrsets.mapAttrsToList;
-    in
-    {
-
-      deploy.nodes.nuc.profiles.system = {
-        user = "root";
-        path = deploy-rs.lib.x86_64-linux.activate.nixos self.nixosConfigurations.nuc;
-      };
-
-      # This is highly advised, and will prevent many possible mistakes
-      checks = builtins.mapAttrs (system: deployLib: deployLib.deployChecks self.deploy) deploy-rs.lib;
-
-      formatter.x86_64-linux = nixpkgs.legacyPackages.x86_64-linux.nixpkgs-fmt;
-
-      # Devshell for bootstrapping
-      # Acessible through 'nix develop' or 'nix-shell' (legacy)
-      devShell = import ./shell.nix { inherit pkgs; };
-
-      # Reusable nixos modules you might want to export
-      nixosModules = import ./modules/nixos;
-      # Reusable home-manager modules you might want to export
-      homeManagerModules = import ./modules/home-manager;
-
-      nixosConfigurations = {
-        nuc = nixpkgs.lib.nixosSystem {
-          specialArgs = { inherit inputs outputs; };
-          modules = [
-            ./nixos/configuration.nix
-            sops-nix.nixosModules.sops
-          ];
-        };
-      };
-
-      homeConfigurations = {
-        "user@nuc" = home-manager.lib.homeManagerConfiguration {
-          pkgs = nixpkgs.legacyPackages.x86_64-linux; # Home-manager requires 'pkgs' instance
-          extraSpecialArgs = { inherit inputs outputs; };
-          modules = [
-            # > Our main home-manager configuration file <
-            ./home-manager/home.nix
-          ];
+  outputs = {
+    self,
+    nixpkgs,
+    flake-utils,
+    home-manager,
+    sops-nix,
+    deploy-rs,
+    ...
+  } @ inputs: let
+    inherit (self) outputs;
+    pkgs = nixpkgs.legacyPackages.x86_64-linux;
+  in {
+    deploy = {
+      sshOpts = ["-A"];
+      nodes = {
+        nuc = {
+          hostname = "nuc.lan";
+          profiles.system = {
+            user = "user";
+            path = deploy-rs.lib.x86_64-linux.activate.nixos self.nixosConfigurations.nuc;
+          };
         };
       };
     };
+
+    # This is highly advised, and will prevent many possible mistakes
+    checks = builtins.mapAttrs (system: deployLib: deployLib.deployChecks self.deploy) deploy-rs.lib;
+
+    formatter.x86_64-linux = pkgs.alejandra;
+
+    # Devshell for bootstrapping
+    # Acessible through 'nix develop' or 'nix-shell' (legacy)
+    devShell = import ./shell.nix {inherit pkgs;};
+
+    # Reusable nixos modules you might want to export
+    nixosModules = import ./modules/nixos;
+    # Reusable home-manager modules you might want to export
+    homeManagerModules = import ./modules/home-manager;
+
+    nixosConfigurations = {
+      nuc = nixpkgs.lib.nixosSystem {
+        specialArgs = {inherit inputs outputs;};
+        modules = [
+          ./nixos/configuration.nix
+          sops-nix.nixosModules.sops
+        ];
+      };
+    };
+
+    homeConfigurations = {
+      "user@nuc" = home-manager.lib.homeManagerConfiguration {
+        pkgs = pkgs; # Home-manager requires 'pkgs' instance
+        extraSpecialArgs = {inherit inputs outputs;};
+        modules = [
+          # > Our main home-manager configuration file <
+          ./home-manager/home.nix
+        ];
+      };
+    };
+  };
 }

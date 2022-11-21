@@ -1,6 +1,8 @@
-{ config, pkgs, ... }:
-
-let
+{
+  config,
+  pkgs,
+  ...
+}: let
   gitConfig = {
     core = {
       editor = "nano";
@@ -20,8 +22,7 @@ let
     gpg.ssh.allowedSignersFile = "~/.ssh/allowed_signers";
     user.signingKey = "~/.ssh/id_ed25519.pub";
   };
-in
-{
+in {
   home.file.".ssh/allowed_signers".text = "* ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAILp007s4hFGCvBDiBwDzY45KZfyjUEcE34nE5W2eYPGD";
 
   programs.git = {

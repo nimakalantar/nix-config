@@ -1,7 +1,9 @@
-{ config, pkgs, ... }:
-
 {
-  environment.systemPackages = with pkgs; [ tailscale ];
+  config,
+  pkgs,
+  ...
+}: {
+  environment.systemPackages = with pkgs; [tailscale];
 
   # Enable the tailscale service
   services.tailscale.enable = true;
@@ -39,9 +41,9 @@
     enable = true;
 
     # Always allow traffic from your Tailscale network
-    trustedInterfaces = [ "tailscale0" ];
+    trustedInterfaces = ["tailscale0"];
 
     # Allow the Tailscale UDP port through the firewall
-    allowedUDPPorts = [ config.services.tailscale.port ];
+    allowedUDPPorts = [config.services.tailscale.port];
   };
 }
