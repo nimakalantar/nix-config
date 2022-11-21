@@ -1,16 +1,22 @@
 # NixOS config
 
+To deploy remotely:
+```
+deploy
+```
+
+To rebuild NixOS config:
 ```
 sudo nixos-rebuild switch --flake .#nuc
 ```
 
+To rebuild home-manager config:
 ```
 home-manager switch --flake .#user@nuc
 ```
 
 ### TODO:
 - Secrets management (sops-nix)
-- Deployment config (nixus or deploy-rs)
 - Use BTRFS for /root
 - Opt-in persistance (/tmpfs RAM disk)
 
