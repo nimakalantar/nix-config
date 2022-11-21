@@ -33,12 +33,12 @@
     pkgs = nixpkgs.legacyPackages.x86_64-linux;
   in {
     deploy = {
-      sshOpts = ["-A"];
       nodes = {
         nuc = {
-          hostname = "nuc.lan";
+          hostname = "nuc";
           profiles.system = {
-            user = "user";
+            sshUser = "root";
+            user = "root";
             path = deploy-rs.lib.x86_64-linux.activate.nixos self.nixosConfigurations.nuc;
           };
         };
@@ -52,7 +52,7 @@
 
     # Devshell for bootstrapping
     # Acessible through 'nix develop' or 'nix-shell' (legacy)
-    devShell = import ./shell.nix {inherit pkgs;};
+    devShells.x86_64-linux = import ./shell.nix {inherit pkgs;};
 
     # Reusable nixos modules you might want to export
     nixosModules = import ./modules/nixos;
