@@ -57,6 +57,7 @@
   boot.loader.efi.canTouchEfiVariables = true;
   boot.loader.efi.efiSysMountPoint = "/boot/efi";
 
+  environment.variables.DOCKER_BUILDKIT = "1";
   virtualisation.docker.enable = true;
 
   services = {
