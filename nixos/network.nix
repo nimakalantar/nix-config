@@ -1,5 +1,5 @@
 {config, ...}: {
-  usePredictableInterfaceNames = true;
+  networking.usePredictableInterfaceNames = true;
 
   # Enable networking
   networking.networkmanager.enable = true;
