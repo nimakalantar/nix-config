@@ -2,7 +2,7 @@
 
 To deploy remotely:
 ```
-deploy
+deploy -s
 ```
 
 To rebuild NixOS config:
@@ -16,9 +16,13 @@ home-manager switch --flake .#user@nuc
 ```
 
 ### TODO:
-- Secrets management (sops-nix)
-- Use BTRFS for /root
-- Opt-in persistance (/tmpfs RAM disk)
+- [x] Pre-commit formatting (alejandra)
+- [x] Flake.lock update mechanism (renovate)
+- [x] Managed deployments (deploy-rs)
+- [ ] Secrets management (sops-nix)
+- [ ] Use BTRFS for /root
+- [ ] Opt-in persistance (/tmpfs RAM disk)
+- [ ] Custom media
 
 Template from:
  - https://github.com/Misterio77/nix-starter-configs
