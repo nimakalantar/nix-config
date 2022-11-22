@@ -17,7 +17,7 @@ home-manager switch --flake .#user@nuc
 
 ### TODO:
 - [x] Pre-commit formatting (alejandra)
-- [x] Flake.lock update mechanism (renovate)
+- [x] flake.lock update mechanism (renovate)
 - [x] Managed deployments (deploy-rs)
 - [ ] Secrets management (sops-nix)
 - [ ] Use BTRFS for /root
