@@ -3,4 +3,5 @@
 {
   # List your module files here
   tailscale = import ./tailscale.nix;
+  docker = import ./docker.nix;
 }
