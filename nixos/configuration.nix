@@ -21,6 +21,7 @@
     ./users.nix
     ./locale.nix
     ./network.nix
+    ./docker.nix
 
     # Import your generated (nixos-generate-config) hardware configuration
     ./hardware-configuration.nix
@@ -56,9 +57,6 @@
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
   boot.loader.efi.efiSysMountPoint = "/boot/efi";
-
-  environment.variables.DOCKER_BUILDKIT = "1";
-  virtualisation.docker.enable = true;
 
   services = {
     getty.autologinUser = "user";
