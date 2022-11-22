@@ -39,6 +39,7 @@
   home.packages = with pkgs; [
     code-server
     deploy-rs
+    sops
     alejandra
     vscode-extensions.kamadorueda.alejandra
     docker
