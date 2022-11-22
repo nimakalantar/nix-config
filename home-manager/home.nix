@@ -37,14 +37,17 @@
   };
 
   home.packages = with pkgs; [
-    deploy-rs
     code-server
+    deploy-rs
     alejandra
     vscode-extensions.kamadorueda.alejandra
     docker
     circleci-cli
     trivy
     pre-commit
+    python310
+    python310Packages.pip
+    python310Packages.icecream
   ];
 
   # Enable home-manager and git
