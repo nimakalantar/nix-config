@@ -43,6 +43,7 @@
     alejandra
     vscode-extensions.kamadorueda.alejandra
     docker
+    hadolint
     circleci-cli
     trivy
     pre-commit
