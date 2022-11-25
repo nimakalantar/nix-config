@@ -44,8 +44,9 @@
       experimental-features = "nix-command flakes";
       # Deduplicate and optimize nix store
       auto-optimise-store = true;
-      trusted-users = ["user"];
     };
+
+    allowedUsers = ["root"];
   };
 
   # Setup keyfile
