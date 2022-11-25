@@ -17,10 +17,10 @@
     # Or modules from other flakes (such as nixos-hardware):
     inputs.hardware.nixosModules.common-cpu-intel-cpu-only
     inputs.hardware.nixosModules.common-pc-ssd
-    inputs.sops-nix.nixosModules.sops
 
     # You can also split up your configuration and import pieces of it here:
     ./users.nix
+    ./sops.nix
     ./locale.nix
     ./network.nix
 
@@ -44,14 +44,9 @@
       experimental-features = "nix-command flakes";
       # Deduplicate and optimize nix store
       auto-optimise-store = true;
+      trusted-users = ["user"];
     };
   };
-
-  sops.defaultSopsFile = ./secrets/secrets.yaml;
-  sops.age.sshKeyPaths = ["/etc/ssh/id_ed25519"];
-  sops.age.keyFile = "/var/lib/sops-nix/key.txt";
-  sops.age.generateKey = true;
-  sops.secrets.nuc-key = {};
 
   # Setup keyfile
   boot.initrd.secrets = {

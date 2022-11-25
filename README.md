@@ -15,11 +15,17 @@ To rebuild home-manager config:
 home-manager switch --flake .#user@nuc
 ```
 
+To edit secrets:
+```
+sops secrets/hosts/nuc.yaml
+```
+
+
 ### TODO:
 - [x] Pre-commit formatting (alejandra)
 - [x] flake.lock update mechanism (renovate)
 - [x] Managed deployments (deploy-rs)
-- [ ] Secrets management (sops-nix)
+- [x] Secrets management (sops-nix)
 - [ ] Use BTRFS for /root
 - [ ] Opt-in persistance (/tmpfs RAM disk)
 - [ ] Custom media
