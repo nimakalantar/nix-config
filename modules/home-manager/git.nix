@@ -12,10 +12,8 @@
     pull.rebase = true;
     push.autoSetupRemote = true;
     url = {
-      "https://github.com/".insteadOf = "gh:";
-      "ssh://git@github.com".pushInsteadOf = "gh:";
-      "https://gitlab.com/".insteadOf = "gl:";
-      "ssh://git@gitlab.com".pushInsteadOf = "gl:";
+      "ssh://git@github.com".pushInsteadOf = "https://github.com/";
+      "ssh://git@gitlab.com".pushInsteadOf = "https://gitlab.com/";
     };
     commit.gpgsign = true;
     gpg.format = "ssh";
