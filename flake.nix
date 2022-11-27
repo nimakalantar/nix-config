@@ -70,6 +70,7 @@
     darwinConfigurations."FF0523" = darwin.lib.darwinSystem {
       system = "aarch64-darwin";
       modules = [ ./darwin/configuration.nix ];
+      inputs = {inherit inputs;};
     };
 
     homeConfigurations = {
@@ -77,7 +78,6 @@
         pkgs = nixpkgs.legacyPackages.x86_64-linux; # Home-manager requires 'pkgs' instance
         extraSpecialArgs = {inherit inputs outputs;};
         modules = [
-          # > Our main home-manager configuration file <
           ./home-manager/nuc.nix
         ];
       };
@@ -85,7 +85,6 @@
         pkgs = nixpkgs.legacyPackages.aarch64-darwin; # Home-manager requires 'pkgs' instance
         extraSpecialArgs = {inherit inputs outputs;};
         modules = [
-          # > Our main home-manager configuration file <
           ./home-manager/mac.nix
         ];
       };

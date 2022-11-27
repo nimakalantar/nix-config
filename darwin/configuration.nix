@@ -1,6 +1,9 @@
-{ config, pkgs, ... }:
-
 {
+  inputs,
+  config,
+  pkgs,
+  ...
+}: {
   # Use a custom configuration.nix location.
   # $ darwin-rebuild switch -I darwin-config=$HOME/.config/nixpkgs/darwin/configuration.nix
   environment.darwinConfig = "$HOME/nix-config/darwin/configuration.nix";
