@@ -4,4 +4,5 @@
   # List your module files here
   git = import ./git.nix;
   ssh = import ./ssh.nix;
+  pkgs = import ./pkgs.nix;
 }

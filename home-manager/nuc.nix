@@ -13,6 +13,7 @@
     # If you want to use modules your own flake exports (from modules/home-manager):
     outputs.homeManagerModules.git
     outputs.homeManagerModules.ssh
+    outputs.homeManagerModules.pkgs
 
     # Or modules exported from other flakes (such as nix-colors):
     # inputs.nix-colors.homeManagerModules.default
@@ -38,18 +39,8 @@
 
   home.packages = with pkgs; [
     code-server
-    deploy-rs
-    sops
-    alejandra
     vscode-extensions.kamadorueda.alejandra
     docker
-    hadolint
-    circleci-cli
-    trivy
-    pre-commit
-    python310
-    python310Packages.pip
-    python310Packages.icecream
   ];
 
   # Enable home-manager and git
