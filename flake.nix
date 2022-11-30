@@ -39,17 +39,19 @@
       "x86_64-linux"
       "aarch64-darwin"
     ];
-  in
-  rec {
-    formatters = forAllSystems (system:
-      with (nixpkgs.legacyPackages.${system}); [ alejandra ]
+  in rec {
+    formatter = forAllSystems (
+      system:
+        nixpkgs.legacyPackages.${system}.alejandra
     );
 
     # Devshell for bootstrapping
     # Acessible through 'nix develop' or 'nix-shell' (legacy)
-    devShells = forAllSystems (system:
-      let pkgs = nixpkgs.legacyPackages.${system};
-      in import ./shell.nix { inherit pkgs; }
+    devShells = forAllSystems (
+      system: let
+        pkgs = nixpkgs.legacyPackages.${system};
+      in
+        import ./shell.nix {inherit pkgs;}
     );
 
     # Reusable nixos modules you might want to export
@@ -69,24 +71,20 @@
 
     darwinConfigurations."FF0523" = darwin.lib.darwinSystem {
       system = "aarch64-darwin";
-      modules = [ ./darwin/configuration.nix ];
-      inputs = {inherit inputs;};
+      modules = [./darwin/configuration.nix];
+      specialArgs = {inherit inputs outputs;};
     };
 
     homeConfigurations = {
       "user@nuc" = home-manager.lib.homeManagerConfiguration {
         pkgs = nixpkgs.legacyPackages.x86_64-linux; # Home-manager requires 'pkgs' instance
         extraSpecialArgs = {inherit inputs outputs;};
-        modules = [
-          ./home-manager/nuc.nix
-        ];
+        modules = [./home-manager/nuc.nix];
       };
       "nima.kalantar@FF0523" = home-manager.lib.homeManagerConfiguration {
         pkgs = nixpkgs.legacyPackages.aarch64-darwin; # Home-manager requires 'pkgs' instance
         extraSpecialArgs = {inherit inputs outputs;};
-        modules = [
-          ./home-manager/mac.nix
-        ];
+        modules = [./home-manager/mac.nix];
       };
     };
 
