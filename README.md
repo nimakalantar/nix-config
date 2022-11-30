@@ -5,10 +5,24 @@ To deploy remotely:
 deploy -s
 ```
 
+## Darwin
+
 To rebuild Darwin config:
 ```
-nix build --extra-experimental-features nix-command --extra-experimental-features flakes .#FF0523
+darwin-rebuild switch --flake .
 ```
+
+To rebuild home-manager config:
+```
+home-manager switch --flake .#nima.kalantar@FF0523
+```
+
+To edit secrets:
+```
+sops secrets/hosts/mac.yaml
+```
+
+## NixOS
 
 To rebuild NixOS config:
 ```
