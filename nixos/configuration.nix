@@ -55,6 +55,8 @@
     "/crypto_keyfile.bin" = null;
   };
 
+  boot.kernelPackages = pkgs.linuxPackages_latest;
+
   networking.hostName = "nuc";
 
   # Bootloader.
