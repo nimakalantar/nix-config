@@ -24,6 +24,11 @@ sops secrets/hosts/mac.yaml
 
 ## NixOS
 
+To build ISO:
+```
+sudo nix build .#nixosConfigurations.nucIso.config.system.build.isoImage
+```
+
 To rebuild NixOS config:
 ```
 sudo nixos-rebuild switch --flake .#nuc
