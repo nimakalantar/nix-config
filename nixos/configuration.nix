@@ -65,11 +65,11 @@
 
   services = {
     getty.autologinUser = "user";
-
+    # SSH server
     openssh.enable = true;
     openssh.permitRootLogin = "yes";
     openssh.passwordAuthentication = false;
-
+    # VSCode remote server
     code-server.enable = true;
   };
 
