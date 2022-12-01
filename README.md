@@ -31,7 +31,7 @@ sudo nixos-rebuild switch --flake .#nuc
 
 To rebuild home-manager config:
 ```
-home-manager switch --flake .#user@nuc
+sudo home-manager switch --flake .#user@nuc
 ```
 
 To edit secrets:
@@ -46,9 +46,9 @@ sops secrets/hosts/nuc.yaml
 - [x] Managed deployments (deploy-rs)
 - [x] Secrets management (sops-nix)
 - [x] Darwin configuration (nix-darwin)
+- [ ] Custom media
 - [ ] Use BTRFS for /root
 - [ ] Opt-in persistance (/tmpfs RAM disk)
-- [ ] Custom media
 - [ ] Semi-secret management (import git-crypted config)
 
 Template from:
