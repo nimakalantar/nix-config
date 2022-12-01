@@ -4,6 +4,11 @@
     hardware.url = "github:nixos/nixos-hardware";
     impermanence.url = "github:nix-community/impermanence";
 
+    disko = {
+      url = "github:nix-community/disko";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     darwin = {
       url = "github:lnl7/nix-darwin/master";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -28,6 +33,7 @@
   outputs = {
     self,
     nixpkgs,
+    disko,
     darwin,
     home-manager,
     sops-nix,
@@ -60,6 +66,23 @@
     homeManagerModules = import ./modules/home-manager;
 
     nixosConfigurations = {
+      nucIso = nixpkgs.lib.nixosSystem {
+        system = "x86_64-linux";
+        modules = [
+          "${nixpkgs}/nixos/modules/installer/cd-dvd/installation-cd-minimal.nix"
+          disko.nixosModules.disko
+          {
+            disko.devices = import ./nixos/disk-config.nix {
+              lib = nixpkgs.lib;
+              disks = ["/dev/nvme0n1"];
+            };
+            boot.loader.grub = {
+              devices = ["/dev/nvme0n1"];
+              efiSupport = true;
+            };
+          }
+        ];
+      };
       nuc = nixpkgs.lib.nixosSystem {
         specialArgs = {inherit inputs outputs;};
         modules = [
