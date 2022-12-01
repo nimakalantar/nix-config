@@ -125,7 +125,7 @@
         profiles.system = {
           sshUser = "nima.kalantar";
           user = "nima.kalantar";
-          path = deploy-rs.lib.x86_64-linux.activate.nixos self.nixosConfigurations.nuc;
+          path = deploy-rs.lib.aarch64-darwin.activate.nixos self.darwinConfigurations."FF0523";
         };
       };
     };
