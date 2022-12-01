@@ -60,16 +60,14 @@
         import ./shell.nix {inherit pkgs;}
     );
 
-    # Reusable nixos modules you might want to export
     nixosModules = import ./modules/nixos;
-    # Reusable home-manager modules you might want to export
     homeManagerModules = import ./modules/home-manager;
 
     nixosConfigurations = {
       nucIso = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
         modules = [
-          "${nixpkgs}/nixos/modules/installer/cd-dvd/installation-cd-minimal.nix"
+          "./nixos/custom-media.nix"
           disko.nixosModules.disko
           {
             disko.devices = import ./nixos/disk-config.nix {
@@ -92,25 +90,28 @@
       };
     };
 
+    # Darwin work dev config
     darwinConfigurations."FF0523" = darwin.lib.darwinSystem {
       system = "aarch64-darwin";
       modules = [./darwin/configuration.nix];
       specialArgs = {inherit inputs outputs;};
     };
 
+    # Home manager config
     homeConfigurations = {
       "user@nuc" = home-manager.lib.homeManagerConfiguration {
-        pkgs = nixpkgs.legacyPackages.x86_64-linux; # Home-manager requires 'pkgs' instance
+        pkgs = nixpkgs.legacyPackages.x86_64-linux;
         extraSpecialArgs = {inherit inputs outputs;};
         modules = [./home-manager/nuc.nix];
       };
       "nima.kalantar@FF0523" = home-manager.lib.homeManagerConfiguration {
-        pkgs = nixpkgs.legacyPackages.aarch64-darwin; # Home-manager requires 'pkgs' instance
+        pkgs = nixpkgs.legacyPackages.aarch64-darwin;
         extraSpecialArgs = {inherit inputs outputs;};
         modules = [./home-manager/mac.nix];
       };
     };
 
+    # Deploy-rs config
     deploy.nodes = {
       nuc = {
         hostname = "nuc";
