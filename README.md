@@ -49,6 +49,7 @@ sops secrets/hosts/nuc.yaml
 - [ ] Use BTRFS for /root
 - [ ] Opt-in persistance (/tmpfs RAM disk)
 - [ ] Custom media
+- [ ] Semi-secret management (import git-crypted config)
 
 Template from:
  - https://github.com/Misterio77/nix-starter-configs
