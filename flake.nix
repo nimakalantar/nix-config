@@ -93,7 +93,7 @@
     # Darwin work dev config
     darwinConfigurations."FF0523" = darwin.lib.darwinSystem {
       system = "aarch64-darwin";
-      modules = [./hosts/darwin/configuration.nix];
+      modules = [./hosts/mac/configuration.nix];
       specialArgs = {inherit inputs outputs;};
     };
 
@@ -107,7 +107,7 @@
       "nima.kalantar@FF0523" = home-manager.lib.homeManagerConfiguration {
         pkgs = nixpkgs.legacyPackages.aarch64-darwin;
         extraSpecialArgs = {inherit inputs outputs;};
-        modules = [./hosts/darwin/home-manager.nix];
+        modules = [./hosts/mac/home-manager.nix];
       };
     };
 
