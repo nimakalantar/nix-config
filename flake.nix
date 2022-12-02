@@ -67,10 +67,10 @@
       nucIso = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
         modules = [
-          "./nixos/custom-media.nix"
+          "./hosts/nuc/custom-media.nix"
           disko.nixosModules.disko
           {
-            disko.devices = import ./nixos/disk-config.nix {
+            disko.devices = import ./hosts/nuc/disk-config.nix {
               lib = nixpkgs.lib;
               disks = ["/dev/nvme0n1"];
             };
@@ -84,7 +84,7 @@
       nuc = nixpkgs.lib.nixosSystem {
         specialArgs = {inherit inputs outputs;};
         modules = [
-          ./nixos/configuration.nix
+          ./hosts/nuc/configuration.nix
           sops-nix.nixosModules.sops
         ];
       };
@@ -93,7 +93,7 @@
     # Darwin work dev config
     darwinConfigurations."FF0523" = darwin.lib.darwinSystem {
       system = "aarch64-darwin";
-      modules = [./darwin/configuration.nix];
+      modules = [./hosts/darwin/configuration.nix];
       specialArgs = {inherit inputs outputs;};
     };
 
@@ -102,12 +102,12 @@
       "user@nuc" = home-manager.lib.homeManagerConfiguration {
         pkgs = nixpkgs.legacyPackages.x86_64-linux;
         extraSpecialArgs = {inherit inputs outputs;};
-        modules = [./home-manager/nuc.nix];
+        modules = [./hosts/nuc/home-manager.nix];
       };
       "nima.kalantar@FF0523" = home-manager.lib.homeManagerConfiguration {
         pkgs = nixpkgs.legacyPackages.aarch64-darwin;
         extraSpecialArgs = {inherit inputs outputs;};
-        modules = [./home-manager/mac.nix];
+        modules = [./hosts/darwin/home-manager.nix];
       };
     };
 

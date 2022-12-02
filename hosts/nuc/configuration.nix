@@ -11,8 +11,9 @@
   # You can import other NixOS modules here
   imports = [
     # If you want to use modules your own flake exports (from modules/nixos):
-    outputs.nixosModules.tailscale
     outputs.nixosModules.docker
+    outputs.nixosModules.locale
+    outputs.nixosModules.tailscale
 
     # Or modules from other flakes (such as nixos-hardware):
     inputs.hardware.nixosModules.common-cpu-intel-cpu-only
@@ -21,7 +22,6 @@
     # You can also split up your configuration and import pieces of it here:
     ./users.nix
     ./sops.nix
-    ./locale.nix
 
     # Import your generated (nixos-generate-config) hardware configuration
     ./hardware-configuration.nix
