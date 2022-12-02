@@ -18,8 +18,9 @@
   boot.extraModulePackages = [];
 
   fileSystems."/" = {
-    device = "/dev/disk/by-uuid/1e4b3617-8923-4eeb-a8d5-482fd04b17e7";
-    fsType = "ext4";
+    device = "none";
+    fsType = "tmpfs";
+    options = ["defaults" "size=2G" "mode=755"];
   };
 
   boot.initrd.luks.devices."luks-a763f4c6-6733-44e3-86cb-0a5ed514e422".device = "/dev/disk/by-uuid/a763f4c6-6733-44e3-86cb-0a5ed514e422";
