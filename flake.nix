@@ -57,7 +57,7 @@
       system: let
         pkgs = nixpkgs.legacyPackages.${system};
       in
-        import ./shell.nix {inherit pkgs;}
+        import ./nix/shell.nix {inherit pkgs;}
     );
 
     nixosModules = import ./modules/nixos;
