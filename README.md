@@ -51,8 +51,8 @@ sops secrets/hosts/nuc.yaml
 - [x] Managed deployments (deploy-rs)
 - [x] Secrets management (sops-nix)
 - [x] Darwin configuration (nix-darwin)
-- [ ] Custom media
-- [ ] Use BTRFS for /root
+- [x] Custom media
+- [x] Disk configuration (disko)
 - [ ] Opt-in persistance (/tmpfs RAM disk)
 - [ ] Semi-secret management (import git-crypted config)
 
