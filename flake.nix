@@ -68,17 +68,6 @@
         system = "x86_64-linux";
         modules = [
           ./hosts/nuc/custom-media.nix
-          disko.nixosModules.disko
-          {
-            disko.devices = import ./hosts/nuc/disk-config.nix {
-              lib = nixpkgs.lib;
-              disks = ["/dev/nvme0n1"];
-            };
-            boot.loader.grub = {
-              devices = ["/dev/nvme0n1"];
-              efiSupport = true;
-            };
-          }
         ];
       };
       nuc = nixpkgs.lib.nixosSystem {
