@@ -67,7 +67,7 @@
       nucIso = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
         modules = [
-          "./hosts/nuc/custom-media.nix"
+          ./hosts/nuc/custom-media.nix
           disko.nixosModules.disko
           {
             disko.devices = import ./hosts/nuc/disk-config.nix {
