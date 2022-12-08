@@ -36,7 +36,7 @@ sudo nixos-rebuild switch --flake .#nuc
 
 To rebuild home-manager config:
 ```
-sudo home-manager switch --flake .#user@nuc
+home-manager switch --flake .#user@nuc
 ```
 
 To edit secrets:
