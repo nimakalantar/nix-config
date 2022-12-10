@@ -11,6 +11,8 @@
   # You can import other NixOS modules here
   imports = [
     # If you want to use modules your own flake exports (from modules/nixos):
+    outputs.nixosModules.nix
+    outputs.nixosModules.common
     outputs.nixosModules.docker
     outputs.nixosModules.locale
     outputs.nixosModules.tailscale
@@ -27,59 +29,18 @@
     ./hardware-configuration.nix
   ];
 
-  nixpkgs.config.allowUnfree = true;
-
-  nix = {
-    # This will add each flake input as a registry
-    # To make nix3 commands consistent with your flake
-    registry = lib.mapAttrs (_: value: {flake = value;}) inputs;
-
-    # This will additionally add your inputs to the system's legacy channels
-    # Making legacy nix commands consistent as well, awesome!
-    nixPath = lib.mapAttrsToList (key: value: "${key}=${value.to.path}") config.nix.registry;
-
-    # Automatic garbage collection
-    gc.automatic = true;
-
-    settings = {
-      # Enable flakes and new 'nix' command
-      experimental-features = "nix-command flakes";
-      # Deduplicate and optimize nix store
-      auto-optimise-store = true;
-      allowed-users = ["root" "user"];
-    };
-  };
+  nix.settings.allowed-users = ["root" "user"];
 
   # Setup keyfile
   boot.initrd.secrets = {
     "/crypto_keyfile.bin" = null;
   };
 
-  boot.kernelPackages = pkgs.linuxPackages_latest;
-
   networking.hostName = "nuc";
-
-  # Bootloader.
-  boot.loader.systemd-boot.enable = true;
-  boot.loader.efi.canTouchEfiVariables = true;
-  boot.loader.efi.efiSysMountPoint = "/boot/efi";
 
   services = {
     getty.autologinUser = "user";
-    # SSH server
-    openssh.enable = true;
-    openssh.permitRootLogin = "yes";
-    openssh.passwordAuthentication = false;
     # VSCode remote server
     code-server.enable = true;
   };
-
-  programs.ssh.startAgent = true;
-
-  # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
-  system.stateVersion = "22.11";
-
-  # Enable autoupgrade
-  system.autoUpgrade.enable = true;
-  system.autoUpgrade.allowReboot = true;
 }
